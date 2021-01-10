@@ -93,7 +93,6 @@
             this.textBoxUserId.Name = "textBoxUserId";
             this.textBoxUserId.Size = new System.Drawing.Size(129, 22);
             this.textBoxUserId.TabIndex = 6;
-            this.textBoxUserId.Text = "RFdv157+l3s=";
             // 
             // label2
             // 
@@ -136,7 +135,7 @@
             this.Controls.Add(this.Discory);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Text = "Read RP 2.1";
+            this.Text = "Read RP 3.1";
             this.ResumeLayout(false);
             this.PerformLayout();
 
