@@ -21,6 +21,8 @@ namespace RedRP
         public string IP { get; set; }
         public DiscoveryHost(string data)
         {
+            if (data.Contains("RES2"))
+                return;
             Dictionary<string, string> dict = SplitHttpResponse(data);
             HostID = dict.ContainsKey("host-id") ?  dict["host-id"] : "";
             HostType = dict.ContainsKey("host-type") ? dict["host-type"] : "";

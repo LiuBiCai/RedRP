@@ -33,6 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\LiuBiCai\RemotePlayPrototype\Ps4RemotePlayPrototype\Ps4RemotePlay\bin\Debug\net472\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LiuBiCai\RemotePlayPrototype\Ps4RemotePlayPrototype\Ps4RemotePlay\bin\Debug\net472\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\LiuBiCai\RemotePlayPrototype\Ps4RemotePlayPrototype\Ps4RemotePlay\bin\Debug\net472\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ps4RemotePlay">
+      <HintPath>..\..\LiuBiCai\RemotePlayPrototype\Ps4RemotePlayPrototype\Ps4RemotePlay\bin\Debug\net472\Ps4RemotePlay.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
