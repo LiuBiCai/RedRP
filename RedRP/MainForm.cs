@@ -63,6 +63,8 @@ namespace RedRP
             Console.WriteLine("共找到" + HostDict.Count + "台PS4,有" + readyCount + "在运行,有" + standByCount + "在待机，有" + RunFIFA20 + "台在运行FIFA");
             textBoxInfo.Text += "共找到" + HostDict.Count + "台PS4,有" + readyCount + "台在运行，有" + standByCount + "台在待机，有" + RunFIFA20 + "台在运行FIFA";
         }
+
+        string PairIP = "";
         public void receive()
         {
             while (true&&!this.IsDisposed)
@@ -82,7 +84,14 @@ namespace RedRP
                     continue;
 
                 string response = Encoding.ASCII.GetString(buffer, 0, receiveNum);
-                //Console.WriteLine(response);
+                Console.WriteLine(response);
+                if(response.Contains("RES2"))
+                {
+                    PairIP= endPoint.ToString().Split(':')[0];
+                    continue;
+                }
+
+
                 DiscoveryHost discoveryHost = new DiscoveryHost(response);
                 discoveryHost.IP = endPoint.ToString().Split(':')[0];
                 
@@ -182,7 +191,7 @@ namespace RedRP
             var pin = int.Parse(textBoxPin.Text);
       
             var userId = Convert.ToBase64String(BitConverter.GetBytes(long.Parse(textBoxUserId.Text)));
-            var ip = IPAddress.Parse(textBoxIP.Text);
+           
 
             //Search 
             byte[] data = Encoding.ASCII.GetBytes("SRC2");
@@ -223,9 +232,11 @@ namespace RedRP
                 ms.Write(nonceDerivative, 0, 8);
                 finalPaddedPayload = ms.ToArray();
             }
+            //var ip = IPAddress.Parse(textBoxIP.Text);
+            textBoxInfo.AppendText(PairIP);
+            var ip = IPAddress.Parse(PairIP);
             IPEndPoint ipEndPoint = new IPEndPoint(ip, 9295);
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
             socket.Connect(ipEndPoint);
 
             string requestData = "POST /sie/ps4/rp/sess/rgst HTTP/1.1\r\n HTTP/1.1\r\n" +
@@ -243,7 +254,7 @@ namespace RedRP
             byte[] response = new byte[readBytes];
             Buffer.BlockCopy(receiveBuffer, 0, response, 0, response.Length);
             string httpResponse = Encoding.ASCII.GetString(receiveBuffer, 0, readBytes);
-
+            Console.WriteLine(httpResponse);
             HttpStatusCode statusCode = HttpUtils.GetStatusCode(httpResponse);
             if (statusCode == HttpStatusCode.OK)
             {
@@ -278,6 +289,11 @@ namespace RedRP
                 var resonCode = match.Groups["value"].Value;
                 textBoxInfo.AppendText(reason[resonCode] + "\r\n");
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

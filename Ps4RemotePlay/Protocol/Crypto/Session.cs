@@ -81,9 +81,9 @@ namespace Ps4RemotePlay.Protocol.Crypto
             this._outputCtr = 0;
         }
 
-        public byte[] Encrypt(byte[] data)
+        public byte[] Encrypt(byte[] data,bool ps5=false)
         {
-            byte[] iv = GetIV(_outputCtr);
+            byte[] iv = GetIV(_outputCtr,ps5);
             ++_outputCtr;
 
             return CreateAesCfbCipher(iv, doEncrypt: true).DoFinal(data);
@@ -200,7 +200,7 @@ namespace Ps4RemotePlay.Protocol.Crypto
         /*** private methods ***/
         /***********************/
 
-        private byte[] GetIV(ulong counter)
+        private byte[] GetIV(ulong counter,bool ps5=false)
         {
             //CHECK 2021.1.9
             //_nonce { 0x3e, 0x7e, 0x7a, 0x82, 0x59, 0x73, 0xad, 0xab, 0x2f, 0x69, 0x43, 0x46, 0xbd, 0x44, 0xda, 0xb5 }
@@ -211,7 +211,12 @@ namespace Ps4RemotePlay.Protocol.Crypto
             
             byte[] hmacInput = ByteUtil.ConcatenateArrays(this._nonce, counterBuffer);
 
-            byte[] hash = CalculateHMAC(CryptoService.HmacKey, hmacInput);
+            byte[] hash = CalculateHMAC(CryptoService.HmacKeyPS4, hmacInput);
+            if(ps5)
+            {
+                hash= CalculateHMAC(CryptoService.HmacKeyPS5, hmacInput);
+            }
+
             // Only take 16 bytes of calculated HMAC
             Array.Resize(ref hash, 16);
             return hash;

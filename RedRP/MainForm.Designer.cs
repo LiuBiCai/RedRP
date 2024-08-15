@@ -41,10 +41,9 @@
             // 
             // Discory
             // 
-            this.Discory.Location = new System.Drawing.Point(13, 35);
-            this.Discory.Margin = new System.Windows.Forms.Padding(4);
+            this.Discory.Location = new System.Drawing.Point(10, 26);
             this.Discory.Name = "Discory";
-            this.Discory.Size = new System.Drawing.Size(100, 28);
+            this.Discory.Size = new System.Drawing.Size(75, 21);
             this.Discory.TabIndex = 0;
             this.Discory.Text = "查找PS4";
             this.Discory.UseVisualStyleBackColor = true;
@@ -52,19 +51,17 @@
             // 
             // textBoxInfo
             // 
-            this.textBoxInfo.Location = new System.Drawing.Point(-2, 64);
-            this.textBoxInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxInfo.Location = new System.Drawing.Point(-2, 48);
             this.textBoxInfo.Multiline = true;
             this.textBoxInfo.Name = "textBoxInfo";
-            this.textBoxInfo.Size = new System.Drawing.Size(348, 410);
+            this.textBoxInfo.Size = new System.Drawing.Size(262, 308);
             this.textBoxInfo.TabIndex = 1;
             // 
             // PairingBtn
             // 
-            this.PairingBtn.Location = new System.Drawing.Point(121, 33);
-            this.PairingBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.PairingBtn.Location = new System.Drawing.Point(91, 25);
             this.PairingBtn.Name = "PairingBtn";
-            this.PairingBtn.Size = new System.Drawing.Size(100, 28);
+            this.PairingBtn.Size = new System.Drawing.Size(75, 21);
             this.PairingBtn.TabIndex = 2;
             this.PairingBtn.Text = " 配对PS4";
             this.PairingBtn.UseVisualStyleBackColor = true;
@@ -73,57 +70,63 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 9);
+            this.label1.Location = new System.Drawing.Point(8, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 17);
+            this.label1.Size = new System.Drawing.Size(21, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "IP";
             // 
             // textBoxIP
             // 
-            this.textBoxIP.Location = new System.Drawing.Point(36, 6);
+            this.textBoxIP.Location = new System.Drawing.Point(27, 4);
+            this.textBoxIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxIP.Name = "textBoxIP";
-            this.textBoxIP.Size = new System.Drawing.Size(116, 22);
+            this.textBoxIP.Size = new System.Drawing.Size(88, 21);
             this.textBoxIP.TabIndex = 4;
-            this.textBoxIP.Text = "192.168.3.225";
+            this.textBoxIP.Text = "192.168.3.73";
             // 
             // textBoxUserId
             // 
-            this.textBoxUserId.Location = new System.Drawing.Point(217, 4);
+            this.textBoxUserId.Location = new System.Drawing.Point(163, 3);
+            this.textBoxUserId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxUserId.Name = "textBoxUserId";
-            this.textBoxUserId.Size = new System.Drawing.Size(129, 22);
+            this.textBoxUserId.Size = new System.Drawing.Size(98, 21);
             this.textBoxUserId.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(158, 9);
+            this.label2.Location = new System.Drawing.Point(118, 7);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 17);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "User Id";
             // 
             // textBoxPin
             // 
-            this.textBoxPin.Location = new System.Drawing.Point(264, 35);
+            this.textBoxPin.Location = new System.Drawing.Point(198, 26);
+            this.textBoxPin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxPin.Name = "textBoxPin";
-            this.textBoxPin.Size = new System.Drawing.Size(82, 22);
+            this.textBoxPin.Size = new System.Drawing.Size(62, 21);
             this.textBoxPin.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 38);
+            this.label3.Location = new System.Drawing.Point(171, 28);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 17);
+            this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "PIN";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 481);
+            this.ClientSize = new System.Drawing.Size(265, 361);
             this.Controls.Add(this.textBoxPin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxUserId);
@@ -133,9 +136,9 @@
             this.Controls.Add(this.PairingBtn);
             this.Controls.Add(this.textBoxInfo);
             this.Controls.Add(this.Discory);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Read RP 3.1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

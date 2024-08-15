@@ -15,11 +15,13 @@ namespace Ps4RemotePlay.Protocol.Crypto
     public static class CryptoService
     {
         //public static readonly byte[] HmacKey = HexUtil.Unhexlify("AC078883C83A1FE811463AF39EE3E377");
-        public static readonly byte[] HmacKey = HexUtil.Unhexlify("20D66F5904EA7C14E557FFC52E488AC8"); //2020.1.10 
-        
+        public static readonly byte[] HmacKeyPS4 = HexUtil.Unhexlify("20D66F5904EA7C14E557FFC52E488AC8"); //2020.1.10 
+        public static readonly byte[] HmacKeyPS5 = HexUtil.Unhexlify("464687B349CA8CE859C5270F5D7A69D6"); //2023.11.12
+
         //public static readonly byte[] RegAesKey = HexUtil.Unhexlify("3F1CC4B6DCBB3ECC50BAEDEF9734C7C9");
-        public static readonly byte[] RegAesKey =   HexUtil.Unhexlify("CEBCB640080776047B85E85BF3EC9463");//2020.1.7 key_0_off=1
-          
+        public static readonly byte[] RegAesKeyPS4 =   HexUtil.Unhexlify("CEBCB640080776047B85E85BF3EC9463");//2020.1.7 key_0_off=1
+        public static readonly byte[] RegAesKeyPS5 = HexUtil.Unhexlify("D860E146BDB0BD94B460070BB14FE723");//2020.1.7 key_0_off=1
+
         public static readonly byte[] RegNonceKey = HexUtil.Unhexlify("E1EC9C3ADDBD0885FC0E1D789032C004");
         public static readonly byte[] AuthAesKey = RegNonceKey;
         public static readonly byte[] AuthNonceKey = HexUtil.Unhexlify("0149879B65398B394B3A8D48C30AEF51");
@@ -54,16 +56,16 @@ namespace Ps4RemotePlay.Protocol.Crypto
             return nonce;
         }
 
-        public static byte[] GetRegistryAesKeyForPin(int pin)
+        public static byte[] GetRegistryAesKeyForPin(int pin,bool ps5=false)
         {
             byte[] bytes = ByteUtil.IntToByteArray(pin);
             byte[] newByteArray = ByteUtil.ConcatenateArrays(bytes, new byte[12]);
 
 
-            byte[] key = new byte[CryptoService.RegAesKey.Length];
-            for (int i = 0; i < CryptoService.RegAesKey.Length; i++)
+            byte[] key = new byte[CryptoService.RegAesKeyPS4.Length];
+            for (int i = 0; i < CryptoService.RegAesKeyPS4.Length; i++)
             {
-                byte x = CryptoService.RegAesKey[i];
+                byte x = CryptoService.RegAesKeyPS4[i];
                 if(i<0xC)
                 {
                     key[i] = x;
@@ -74,6 +76,24 @@ namespace Ps4RemotePlay.Protocol.Crypto
                     key[i] = ((byte)(x ^ y));
                 }
                 
+            }
+            if(ps5)
+            {
+                key = new byte[CryptoService.RegAesKeyPS5.Length];
+                for (int i = 0; i < CryptoService.RegAesKeyPS5.Length; i++)
+                {
+                    byte x = CryptoService.RegAesKeyPS5[i];
+                    if (i < 0xC)
+                    {
+                        key[i] = x;
+                    }
+                    else
+                    {
+                        byte y = newByteArray[i - 0xC];
+                        key[i] = ((byte)(x ^ y));
+                    }
+
+                }
             }
 
             return key;
@@ -110,12 +130,12 @@ namespace Ps4RemotePlay.Protocol.Crypto
             return Session.GenerateKeyPair();
         }
 
-        public static Session GetSessionForPin(int pin, byte[] nonce = null)
+        public static Session GetSessionForPin(int pin, bool ps5 = false, byte[] nonce = null)
         {
             if (nonce != null && nonce.Length != 16)
                 throw new InvalidKeyException("Nonce of invalid length");
 
-            var key = GetRegistryAesKeyForPin(pin);
+            var key = GetRegistryAesKeyForPin(pin,ps5);
             //pin 12345678 key 后四位 F3 50 F5 2D 2020.1.8
             //CHECK PASS 2020.1.8
 
